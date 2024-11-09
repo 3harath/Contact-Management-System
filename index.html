@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Manage Contacts</h2>
+    <form action="/add_contact" method="post">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="phone" placeholder="Phone" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <button type="submit">Add Contact</button>
+    </form>
+    <ul class="contact-list">
+        {% for contact in contacts %}
+            <li>
+                <strong>{{ contact[1] }}</strong> - {{ contact[2] }} - {{ contact[3] }}
+                <form action="/delete_contact" method="post" style="display:inline;">
+                    <input type="hidden" name="contact_id" value="{{ contact[0] }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
